@@ -26,16 +26,14 @@ public class UpdateUsersConect extends Thread {
             //String mens;
 
             while (true) {
-               byte[] buf = new byte[100000];
+                byte[] buf = new byte[100000];
                 DatagramPacket paquete = new DatagramPacket(buf, buf.length);
                 socket.receive(paquete);
 
                 String mens = new String(paquete.getData()).trim();
-                System.out.println("Recibido "+mens);
+                System.out.println("Recibido " + mens);
                 System.out.println(mens.length());
-               // getUsers(mens.trim());
-
-
+                getUsers(mens.trim());
 
             }
 
