@@ -12,7 +12,7 @@ import java.io.OutputStream;
 
 public class CrtlNameWindow implements ActionListener{
 
-    private String ipServer = "192.168.43.136";
+    private String ipServer = "192.168.1.56";
 
     private NameWindow NameWindow;
 

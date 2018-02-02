@@ -7,32 +7,35 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-public class UpdateUsersConect extends Thread{
+public class UpdateUsersConect extends Thread {
 
     Window window;
     private int port = 4444;
 
-    public UpdateUsersConect(Window window){
+    public UpdateUsersConect(Window window) {
         this.window = window;
     }
 
     @Override
     public void run() {
         try {
-            MulticastSocket socket = new MulticastSocket(port);
-            InetAddress group = InetAddress.getByName("224.0.0.1");
+            MulticastSocket socket = new MulticastSocket(4444);
+            InetAddress group = InetAddress.getByName("225.10.10.11");
             socket.joinGroup(group);
-            String mens;
 
-            while (true){
+            //String mens;
 
-                byte[] packetByte = new byte[1000];
-                DatagramPacket packetReciv = new DatagramPacket(packetByte, packetByte.length);
-                socket.receive(packetReciv);
+            while (true) {
+               byte[] buf = new byte[100000];
+                DatagramPacket paquete = new DatagramPacket(buf, buf.length);
+                socket.receive(paquete);
 
-                mens = new String(packetReciv.getData());
-                System.out.println(mens.trim());
-                getUsers(mens.trim());
+                String mens = new String(paquete.getData()).trim();
+                System.out.println("Recibido "+mens);
+                System.out.println(mens.length());
+               // getUsers(mens.trim());
+
+
 
             }
 
@@ -42,12 +45,12 @@ public class UpdateUsersConect extends Thread{
     }
 
 
-    private void getUsers(String users){
+    private void getUsers(String users) {
+        System.out.println("te doy usuarios");
         window.listUsers.removeAll();
         String[] user = users.split(" ");
-        for (int i = 0;i < user.length;i++){
+        for (int i = 0; i < user.length; i++) {
             window.listUsers.addItem(user[i]);
-            System.out.println("Llegué a getUsers y esta estos son los usuarios"+ user[i]);
         }
     }
 

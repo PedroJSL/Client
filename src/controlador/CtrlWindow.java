@@ -14,7 +14,7 @@ public class CtrlWindow implements ActionListener{
 
     Window window;
 
-    private String ipServer = "192.168.43.136";
+    private String ipServer = "192.168.1.56";
 
     public CtrlWindow(Window window){
         this.window = window;
